@@ -11,6 +11,93 @@ A local blockchain-based voting system using Flask web interface and Solidity sm
 - Secure transactions signed with private keys
 - **Persistent voting data** - votes survive server restarts
 
+## System Architecture
+
+```mermaid
+graph TB
+    A[User Browser] --> B[Flask Web Server]
+    B --> C[HTML Templates]
+    B --> D[CSS Styling]
+    B --> E[Session Management]
+
+    B --> F[Web3.py Client]
+    F --> G[Ganache CLI]
+    G --> H[(Blockchain Database)]
+
+    F --> I[Smart Contract]
+    I --> J[Voting Logic]
+    I --> K[User Management]
+    I --> L[Contestant Management]
+
+    M[Admin User] --> N[Admin Panel]
+    N --> O[Add Contestants]
+    N --> P[Register Users]
+
+    Q[Regular User] --> R[Login Page]
+    R --> S[Address + Private Key]
+    S --> T[Authentication]
+
+    T --> U{Voting Eligible?}
+    U -->|Yes| V[Vote Page]
+    U -->|No| W[View Results Only]
+
+    V --> X[Select Contestant]
+    X --> Y[Sign Transaction]
+    Y --> Z[Send to Blockchain]
+    Z --> AA[Update Vote Count]
+    AA --> BB[Refresh UI]
+
+    CC[Background Poller] --> DD[Update Contestant Data]
+    DD --> EE[Real-time Results]
+
+    FF[Contract Persistence] --> GG[contract_address.json]
+    FF --> HH[Blockchain State]
+
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e8
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+    style G fill:#2196f3
+    style H fill:#4caf50
+    style I fill:#9c27b0
+    style J fill:#ff9800
+    style K fill:#e91e63
+    style L fill:#009688
+    style M fill:#ff5722
+    style N fill:#795548
+    style O fill:#607d8b
+    style P fill:#9e9e9e
+    style Q fill:#3f51b5
+    style R fill:#2196f3
+    style S fill:#00bcd4
+    style T fill:#009688
+    style U fill:#8bc34a
+    style V fill:#cddc39
+    style W fill:#ffc107
+    style X fill:#ff9800
+    style Y fill:#f44336
+    style Z fill:#9c27b0
+    style AA fill:#673ab7
+    style BB fill:#3f51b5
+    style CC fill:#00bcd4
+    style DD fill:#4caf50
+    style EE fill:#8bc34a
+    style FF fill:#607d8b
+    style GG fill:#9e9e9e
+    style HH fill:#795548
+```
+
+### How It Works
+
+1. **Setup Phase**: Ganache blockchain starts with persistent storage
+2. **Contract Deployment**: Voting smart contract is deployed and saved
+3. **Admin Setup**: Admin adds contestants and registers voters
+4. **User Voting**: Users authenticate and cast votes via signed transactions
+5. **Real-time Updates**: Background polling keeps vote tallies current
+6. **Persistence**: Votes survive server restarts through blockchain storage
+
 ## Requirements
 
 - Python 3.10+
