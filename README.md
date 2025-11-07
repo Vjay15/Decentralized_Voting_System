@@ -2,6 +2,14 @@
 
 A local blockchain-based voting system using Flask web interface and Solidity smart contract. The entire system runs offline on a single PC using a local Ethereum test network (Ganache).
 
+## Team Members
+
+- Syed Suhail - 220071601263
+- Tharagaraman B - 220071601264
+- Ujjual Menon NP - 220071601267
+- Vjaylakshman K - 220071601270
+- Zuhair - 220071601273
+
 ## Features
 
 - Offline blockchain voting system
